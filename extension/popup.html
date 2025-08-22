@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PhishShield</title>
+    <style>
+      :root {
+        font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        --safe: #16a34a;
+        --caution: #facc15;
+        --risky: #f97316;
+        --danger: #dc2626;
+        --bg1: #0f172a;
+        --bg2: #1e293b;
+        --card-bg: rgba(255, 255, 255, 0.08);
+      }
+
+      body {
+        margin: 0;
+        padding: 18px;
+        width: 360px;
+        min-height: 420px;
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card {
+        width: 100%;
+        background: var(--card-bg);
+        border-radius: 18px;
+        padding: 22px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        animation: fadeIn 0.6s ease;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      .header h1 {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0;
+        background: linear-gradient(90deg, #60a5fa, #2563eb);
+        -webkit-text-fill-color: transparent;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .score {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 28px;
+        font-weight: 700;
+        color: white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.45);
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .score:hover {
+        transform: scale(1.08);
+      }
+
+      .meta {
+        flex: 1;
+        overflow: hidden;
+      }
+
+      .url {
+        font-size: 13px;
+        color: #d1d5db;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin-bottom: 4px;
+      }
+
+      .label {
+        font-weight: 600;
+        font-size: 15px;
+        color: #f9fafb;
+      }
+
+      .btn {
+        margin-top: 18px;
+        width: 100%;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      .btn:hover {
+        background: linear-gradient(135deg, #1d4ed8, #1e40af);
+        transform: translateY(-2px);
+      }
+
+      .legend {
+        margin-top: 16px;
+        font-size: 12px;
+        color: #9ca3af;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .muted {
+        font-size: 12px;
+        margin-top: 12px;
+        color: #a5b4fc;
+        font-style: italic;
+        text-align: center;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <h1>🔒 PhishShield Scanner</h1>
+      </div>
+      <div class="row">
+        <div id="score" class="score">--</div>
+        <div class="meta">
+          <div class="url" id="url"></div>
+          <div class="label" id="label"></div>
+        </div>
+      </div>
+      <button id="scan" class="btn">🔍 Scan this site</button>
+      <div class="legend">
+        <span style="color: var(--safe)">0–24 Safe</span> ·
+        <span style="color: var(--caution)">25–49 Caution</span> ·
+        <span style="color: var(--risky)">50–74 Risky</span> ·
+        <span style="color: var(--danger)">75–100 Phishing</span>
+      </div>
+      <div class="muted" id="hint"></div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
